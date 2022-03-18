@@ -9,4 +9,5 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'^about/$', views.about, name='about'),     # ex:- https:127.0.0.0/about
     re_path(r'^teams/', include('teams.urls')),
+    re_path(r'^coaches/', include('coachesv2.urls')),
 ]

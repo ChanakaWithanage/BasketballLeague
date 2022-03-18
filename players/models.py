@@ -1,5 +1,6 @@
 from django.db import models
-from teams.models import Team
+
+from accounts.models import User
 
 
 class Player(models.Model):
@@ -31,6 +32,8 @@ class Player(models.Model):
     weight = models.PositiveSmallIntegerField(
         verbose_name='Weight [kg]',
     )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.first_name + " " + self.last_name

@@ -1,7 +1,5 @@
 from django.db import models
 
-from coaches.models import Coach
-
 
 class Team(models.Model):
     name = models.CharField(
@@ -16,7 +14,7 @@ class Team(models.Model):
     )
 
     coach = models.OneToOneField(
-        Coach,
+        'coachesv2.Coach', related_name='team',
         verbose_name='Coach',
         on_delete=models.DO_NOTHING,
     )

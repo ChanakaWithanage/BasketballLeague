@@ -1,13 +1,7 @@
-from http import HTTPStatus
 
 from django.http import JsonResponse
-from .models import Team
+from teams.models import Team
 from django.shortcuts import get_object_or_404
-
-
-def team_list_view(request):
-    teams = Team.objects.all().values()
-    return JsonResponse({'teams': list(teams)})
 
 
 def team_view(request, code):
