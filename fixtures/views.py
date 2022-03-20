@@ -15,9 +15,10 @@ def game_view(game_id):
 
 @login_required
 def scorecard_view(request):
+    fr_games = Game.objects.filter(round=Game.FR)       # fetch first round
     qf_games = Game.objects.filter(round=Game.QF)       # fetch quarter finals
     sf_games = Game.objects.filter(round=Game.SF)       # fetch semi finals
     final = Game.objects.filter(round=Game.FI)          # fetch final game
 
-    scorecard = {'QF': qf_games, 'SF': sf_games, 'FI': final}
+    scorecard = {'FR': fr_games, 'QF': qf_games, 'SF': sf_games, 'FI': final}
     return render(request, 'fixtures/scorecard.html', scorecard)
