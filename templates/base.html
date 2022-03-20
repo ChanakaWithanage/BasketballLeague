@@ -10,5 +10,20 @@
     {% block content%}
 
     {% endblock %}
+    <hr>
+    <ul id="menu">
+        {% if user.is_authenticated %}
+            <li><h3><a href="{% url 'index' %}">home</a></h3></li>
+            <li>
+                <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+        {% else %}
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+        {% endif %}
+    </ul>
 </body>
 </html>

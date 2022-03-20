@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <div>
+        <h2>Registered Teams</h2>
+        <ol>
+            {% for team in teams %}
+                <li>
+                    <div>
+                        <h3><a href="{% url 'teams:team_details' code=team.short_code %}">{{ team.name }} ({{ team.short_code}})</a></h3>
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}

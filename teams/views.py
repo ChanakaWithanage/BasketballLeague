@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.http import JsonResponse, HttpResponseForbidden
+from django.http import HttpResponseForbidden
 from accounts.models import User
 from fixtures.models import Game
 from .models import Team
@@ -11,8 +11,8 @@ from django.shortcuts import get_object_or_404, render
 def team_list_view(request):
     user = User.objects.get(id=request.user.id)
     if user.user_type == User.Admin:
-        teams = Team.objects.all().values()
-        return JsonResponse({'teams': list(teams)})
+        teams = Team.objects.all()
+        return render(request, 'teams/team_list.html', {'teams': teams})
     else:
         return HttpResponseForbidden()
 
@@ -23,19 +23,20 @@ def team_view(request, code):
     if user.user_type != User.Player:
         team = get_object_or_404(Team, short_code=code)
         players = team.player.all()
-        details = {'team': team, 'players': players, 'avg': calculate_avg_score(team)}
+        games_played = Game.objects.filter(Q(home_team=team) | Q(away_team=team))
+        details = {'team': team, 'players': players, 'avg': calculate_avg_score(team, games_played)}
         return render(request, 'teams/team.html', details)
     else:
         return HttpResponseForbidden()
 
 
-def calculate_avg_score(team):
+def calculate_avg_score(team, games_played):
     """
     This method will calculate the average score for a team
+    @param games_played:
     @param team: Team
     @return: float average
     """
-    games_played = Game.objects.filter(Q(home_team=team) | Q(away_team=team))
 
     total_points = 0
     total_games = 0

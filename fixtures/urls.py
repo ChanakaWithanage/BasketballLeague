@@ -2,6 +2,8 @@
 from django.urls import re_path
 from . import views
 
+app_name = 'fixtures'
+
 
 urlpatterns = [
     re_path(r'^game=(?P<game_id>[\w-]+)/$', views.game_view, name="game"),

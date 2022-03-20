@@ -16,7 +16,7 @@ class Team(models.Model):
     coach = models.OneToOneField(
         'coachesv2.Coach', related_name='team',
         verbose_name='Coach',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         null=True, blank=True
     )
 

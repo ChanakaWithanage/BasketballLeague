@@ -3,11 +3,13 @@ from django.db import models
 
 class Game(models.Model):
 
+    FR = 'FR'
     QF = 'QF'
     SF = 'SF'
     FI = 'FI'
 
     Game_Rounds = [
+        ('FR', 'First  Round'),
         ('QF', 'Quarter Final'),
         ('SF', 'Semi Final'),
         ('FI', 'Final')
@@ -16,13 +18,13 @@ class Game(models.Model):
     home_team = models.ForeignKey(
         'teams.Team', related_name='home_game',
         verbose_name='Home team',
-        on_delete=models.DO_NOTHING
+        on_delete=models.CASCADE
     )
 
     away_team = models.ForeignKey(
         'teams.Team', related_name='away_game',
         verbose_name='Away team',
-        on_delete=models.DO_NOTHING
+        on_delete=models.CASCADE
     )
 
     home_team_score = models.IntegerField(
@@ -37,7 +39,7 @@ class Game(models.Model):
         'teams.Team', related_name='winner',
         verbose_name='Winner',
         null=True, blank=True,
-        on_delete=models.DO_NOTHING
+        on_delete=models.CASCADE
     )
 
     date = models.DateField(

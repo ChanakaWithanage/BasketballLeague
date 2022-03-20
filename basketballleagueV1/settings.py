@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'coachesv2',
     'fixtures',
+    'sitestats',
 ]
 
 MIDDLEWARE = [

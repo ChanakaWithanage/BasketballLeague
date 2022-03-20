@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <div>
+        <h2>User Summary</h2>
+        <ul>
+            {% for stat in stats %}
+                <li>
+                    <div>
+                        <h3>{{ stat.user }} </h3>
+                        <p>Login count: {{ stat.login_count }}</p>
+                        <p>Total online time: {{ stat.total_online_time }} minutes</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Online users</h2>
+        <ul>
+            {% for user in online_users %}
+                <li>
+                    <div>
+                        <h3>{{ user.user }} </h3>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

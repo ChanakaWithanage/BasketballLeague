@@ -54,15 +54,24 @@ def filter_view(request, team_code, percentile=90):
             average = calculate_avg(player)
             avg_scores[player] = average
             score_list.append(average)
-        print(avg_scores)
-        percentile_score = np.percentile(score_list, float(percentile))
-        print(percentile_score)
-        filtered_players = sorted({k: v for (k, v) in avg_scores.items() if v >= percentile_score}.items()
-                                  , key=itemgetter(1), reverse=True)
-        print(filtered_players)
+        filtered_players = get_filtered_players(avg_scores, percentile, score_list)
         return render(request, 'players/top_players.html', {'players': filtered_players})
     else:
         return HttpResponseForbidden()
+
+
+def get_filtered_players(avg_scores, percentile, score_list):
+    """
+    This method will sort the players according to avg and filter with the given percentile
+    @param avg_scores:
+    @param percentile:
+    @param score_list:
+    @return:
+    """
+    percentile_score = np.percentile(score_list, float(percentile))
+    filtered_players = sorted({k: v for (k, v) in avg_scores.items() if v >= percentile_score}.items()
+                              , key=itemgetter(1), reverse=True)
+    return filtered_players
 
 
 @register.filter(name='dict_key')
