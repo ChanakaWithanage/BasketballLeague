@@ -1,5 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from accounts.forms import SignUpForm
@@ -41,10 +43,14 @@ def login_view(request):
 
 def logout_view(request):
     if request.method == 'POST':
-        temp_user = User.objects.get(id=request.user.id)
-        stats = Stat.objects.filter(user=temp_user)
-        logout(request)
-        for stat in stats:
-            stat.logout_time = timezone.now()
-            stat.save()
-        return redirect('accounts:login')
+        try:
+            temp_user = User.objects.get(id=request.user.id)
+            stats = Stat.objects.filter(user=temp_user)
+            logout(request)
+            for stat in stats:
+                stat.logout_time = timezone.now()
+                stat.save()
+            return redirect('accounts:login')
+        except ObjectDoesNotExist:
+            return HttpResponse("Exception: User data not found")
+
