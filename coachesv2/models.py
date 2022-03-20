@@ -14,7 +14,7 @@ class Coach(models.Model):
         max_length=100,
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.first_name + " " + self.last_name

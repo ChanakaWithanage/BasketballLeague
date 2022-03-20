@@ -18,7 +18,7 @@ class Player(models.Model):
         'teams.Team', related_name='player',
         verbose_name='Team',
         on_delete=models.DO_NOTHING,
-        null=True,
+        null=True, blank=True
     )
 
     date_of_birth = models.DateField(
@@ -33,7 +33,7 @@ class Player(models.Model):
         verbose_name='Weight [kg]',
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.first_name + " " + self.last_name

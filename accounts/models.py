@@ -4,10 +4,14 @@ from django.db import models
 
 class User(AbstractUser):
 
+    Admin = 1
+    Coach = 2
+    Player = 3
+
     USER_TYPES = (
-        (1, 'Admin'),
-        (2, 'Coach'),
-        (3, 'Player'),
+        (Admin, 'Admin'),
+        (Coach, 'Coach'),
+        (Player, 'Player'),
     )
 
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPES, default=1)

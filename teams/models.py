@@ -17,6 +17,7 @@ class Team(models.Model):
         'coachesv2.Coach', related_name='team',
         verbose_name='Coach',
         on_delete=models.DO_NOTHING,
+        null=True, blank=True
     )
 
     def __str__(self):

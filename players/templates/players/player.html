@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <div>
+        <h1>Player Profile</h1>
+        <h2>{{ player }}</h2>
+        <div>
+            <p>height: {{ player.height }}cm</p>
+            <p>weight: {{ player.weight }}kg</p>
+            <p>team: {{ player.team }}</p>
+            <p>games played: {{ game_count }}</p>
+            <p>average score: {{ average }}</p>
+        </div>
+
+    </div>
+{% endblock %}

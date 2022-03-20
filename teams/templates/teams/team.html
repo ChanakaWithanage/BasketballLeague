@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+    <div>
+        <h1>{{ team.name }} ({{ team.short_code }})</h1>
+
+        <h3>Average score: {{ avg }}</h3>
+        <h2>Players</h2>
+
+        <ol>
+            {% for player in players %}
+                <li>
+
+                    <div>
+                        <h3><a href="{% url 'players:player' player_id=player.id %}">{{ player }}</a></h3>
+                        <p>height: {{ player.height }}cm</p>
+                        <p>weight: {{ player.weight }}kg</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock %}

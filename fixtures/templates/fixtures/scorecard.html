@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <div >
+        <h1>Scoreboard</h1>
+        <br>
+        <h2>Quarter finals</h2>
+        <table>
+          <thead>
+            <tr>
+                <th scope="col">Game No.</th>
+                <th scope="col">Round</th>
+                <th scope="col">Home</th>
+                <th scope="col">Home Score</th>
+                <th scope="col">Away</th>
+                <th scope="col">Away Score</th>
+                <th scope="col">Winner</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for game in QF %}
+            <tr>
+                <th scope="row">{{ game.id }}</th>
+                <td>{{ game.round }}</td>
+                <td><a href="{% url 'teams:team_details' code=game.home_team.short_code %}">{{ game.home_team.name }}</a></td>
+                <td>{{ game.home_team_score }}</td>
+                <td><a href="{% url 'teams:team_details' code=game.away_team.short_code %}">{{ game.away_team.name }}</a></td>
+                <td>{{ game.away_team_score }}</td>
+                <td>{{ game.winner.name }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+
+        <br>
+        <h2>Semi finals</h2>
+        {% if SF %}
+            <table border="0">
+              <thead>
+                <tr>
+                    <th scope="col">Game No.</th>
+                    <th scope="col">Round</th>
+                    <th scope="col">Home Team</th>
+                    <th scope="col">Home Score</th>
+                    <th scope="col">Away Team</th>
+                    <th scope="col">Away Score</th>
+                    <th scope="col">Winner</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for game in SF %}
+                <tr>
+                    <th scope="row">{{ game.id }}</th>
+                    <td>{{ game.round }}</td>
+                    <td><a href="{% url 'teams:team_details' code=game.home_team.short_code %}">{{ game.home_team.name }}</a></td>
+                    <td>{{ game.home_team_score }}</td>
+                    <td><a href="{% url 'teams:team_details' code=game.away_team.short_code %}">{{ game.away_team.name }}</a></td>
+                    <td>{{ game.away_team_score }}</td>
+                    <td>{{ game.winner.name }}</td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+            <p>To Be Played</p>
+        {% endif %}
+        <br>
+        <h2>Final</h2>
+        {% if FI %}
+            <table>
+              <thead>
+                <tr>
+                    <th scope="col">Game No.</th>
+                    <th scope="col">Round</th>
+                    <th scope="col">Home</th>
+                    <th scope="col">Home Score</th>
+                    <th scope="col">Away</th>
+                    <th scope="col">Away Score</th>
+                    <th scope="col">Winner</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for game in FI %}
+                    <tr>
+                        <th scope="row">{{ game.id }}</th>
+                        <td>{{ game.round }}</td>
+                        <td><a href="{% url 'teams:team_details' code=game.home_team.short_code %}">{{ game.home_team.name }}</a></td>
+                        <td>{{ game.home_team_score }}</td>
+                        <td><a href="{% url 'teams:team_details' code=game.away_team.short_code %}">{{ game.away_team.name }}</a></td>
+                        <td>{{ game.away_team_score }}</td>
+                        <td>{{ game.winner.name }}</td>
+                    </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+        {% else %}
+            <p>To Be Played</p>
+        {% endif %}
+    </div>
+{% endblock %}

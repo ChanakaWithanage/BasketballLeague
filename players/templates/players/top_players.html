@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <div>
+        <h2>Top Players</h2>
+        <ol>
+            {% for k in players %}
+                <li>
+                    <div>
+                        <h3>{{ k|dict_key:0 }} </h3>
+                        <p>Average: {{ k|dict_key:1 }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+
+    </div>
+{% endblock %}
